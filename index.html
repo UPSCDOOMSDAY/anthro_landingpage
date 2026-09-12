@@ -1,0 +1,897 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Anthropology | Dooms Day QCAB</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+:root{
+    --blue:#2563eb;
+    --blue2:#3b82f6;
+    --dark:#102a56;
+    --text:#172033;
+    --muted:#64748b;
+    --white:#ffffff;
+}
+
+body{
+    font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    min-height:100vh;
+    color:var(--text);
+
+    background:
+        radial-gradient(circle at 10% 10%, rgba(37,99,235,.13), transparent 28%),
+        radial-gradient(circle at 90% 20%, rgba(96,165,250,.16), transparent 28%),
+        linear-gradient(135deg,#f7fbff 0%,#edf5ff 48%,#f8fbff 100%);
+
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    opacity:.32;
+
+    background-image:
+        linear-gradient(rgba(37,99,235,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(37,99,235,.035) 1px,transparent 1px);
+
+    background-size:45px 45px;
+}
+
+header{
+    position:relative;
+    z-index:10;
+    width:100%;
+    padding:25px 6%;
+}
+
+.nav{
+    max-width:1200px;
+    margin:auto;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:19px;
+    font-weight:800;
+    letter-spacing:-.5px;
+    color:var(--dark);
+}
+
+.logo span{
+    display:block;
+    margin-top:4px;
+    font-size:10px;
+    font-weight:500;
+    letter-spacing:2px;
+    color:var(--muted);
+}
+
+main{
+    position:relative;
+    z-index:2;
+    max-width:1200px;
+    margin:auto;
+    padding:65px 6% 100px;
+}
+
+.hero{
+    position:relative;
+    min-height:580px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:10px 18px;
+    border-radius:100px;
+    background:rgba(255,255,255,.72);
+    border:1px solid rgba(37,99,235,.12);
+    box-shadow:0 8px 30px rgba(37,99,235,.07);
+    font-size:15px;
+    font-weight:800;
+    letter-spacing:2px;
+    color:var(--blue);
+    text-transform:uppercase;
+    margin-bottom:28px;
+}
+
+.eyebrow::before{
+    content:"";
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:#2563eb;
+    position:relative;
+    flex-shrink:0;
+    box-shadow:0 0 0 0 rgba(37,99,235,.55);
+    animation:waterDrop 2s ease-out infinite;
+}
+
+@keyframes waterDrop{
+    0%{
+        transform:scale(1);
+        box-shadow:
+            0 0 0 0 rgba(37,99,235,.55),
+            0 0 0 0 rgba(37,99,235,.30);
+    }
+
+    35%{
+        transform:scale(1.35);
+        box-shadow:
+            0 0 0 6px rgba(37,99,235,.16),
+            0 0 0 0 rgba(37,99,235,.30);
+    }
+
+    70%{
+        transform:scale(1);
+        box-shadow:
+            0 0 0 13px rgba(37,99,235,0),
+            0 0 0 6px rgba(37,99,235,.10);
+    }
+
+    100%{
+        transform:scale(1);
+        box-shadow:
+            0 0 0 20px rgba(37,99,235,0),
+            0 0 0 14px rgba(37,99,235,0);
+    }
+}
+
+h1{
+    position:relative;
+    font-size:clamp(38px,5vw,68px);
+    line-height:1;
+    letter-spacing:-3px;
+    font-weight:800;
+    color:var(--dark);
+    margin-bottom:30px;
+}
+
+h1 .top-line{
+    display:block;
+    font-size:1em;
+    white-space:nowrap;
+}
+
+h1 .bottom-line{
+    display:block;
+    font-size:.72em;
+    letter-spacing:-2px;
+    margin-top:8px;
+    white-space:nowrap;
+}
+
+h1::after{
+    content:"ANTHROPOLOGY";
+    position:absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%,-48%);
+    z-index:-1;
+    white-space:nowrap;
+    font-size:clamp(70px,14vw,180px);
+    font-weight:800;
+    letter-spacing:-10px;
+    color:rgba(37,99,235,.035);
+}
+
+.subtitle{
+    max-width:590px;
+    color:var(--muted);
+    font-size:17px;
+    line-height:1.8;
+    margin-bottom:38px;
+}
+
+.hero-buttons{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:14px;
+    flex-wrap:wrap;
+}
+
+.journey-btn,
+.sample-btn{
+    cursor:pointer;
+    padding:17px 28px;
+    border-radius:14px;
+    font-family:inherit;
+    font-size:12px;
+    font-weight:700;
+    letter-spacing:.7px;
+    transition:.3s ease;
+}
+
+.journey-btn{
+    border:none;
+    color:white;
+    background:linear-gradient(135deg,#2563eb,#1746a2);
+    box-shadow:
+        0 15px 35px rgba(37,99,235,.25),
+        inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.journey-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:
+        0 20px 42px rgba(37,99,235,.32),
+        inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+.sample-btn{
+    border:1px solid rgba(37,99,235,.18);
+    color:var(--blue);
+    background:rgba(255,255,255,.72);
+    box-shadow:0 10px 25px rgba(37,99,235,.06);
+}
+
+.sample-btn:hover{
+    transform:translateY(-3px);
+    background:white;
+    border-color:rgba(37,99,235,.32);
+    box-shadow:0 15px 35px rgba(37,99,235,.10);
+}
+
+.journey{
+    margin-top:45px;
+    position:relative;
+    padding:65px 0 35px;
+}
+
+.journey-line{
+    position:absolute;
+    top:125px;
+    left:14%;
+    right:14%;
+    height:2px;
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(37,99,235,.25),
+            rgba(37,99,235,.45),
+            rgba(37,99,235,.25),
+            transparent
+        );
+}
+
+.journey-items{
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:50px;
+}
+
+.journey-item{
+    text-align:center;
+    position:relative;
+}
+
+.circle{
+    width:125px;
+    height:125px;
+    margin:0 auto 28px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            rgba(255,255,255,.98),
+            rgba(239,246,255,.94)
+        );
+
+    border:2px solid rgba(37,99,235,.18);
+
+    box-shadow:
+        0 18px 45px rgba(37,99,235,.14),
+        0 0 0 10px rgba(37,99,235,.035),
+        inset 0 0 25px rgba(37,99,235,.035);
+
+    color:var(--blue);
+    font-size:17px;
+    font-weight:800;
+    letter-spacing:.5px;
+    position:relative;
+    z-index:3;
+
+    transition:
+        transform .45s ease,
+        box-shadow .45s ease;
+}
+
+.circle::before{
+    content:"";
+    position:absolute;
+    inset:-9px;
+    border-radius:50%;
+    border:1px dashed rgba(37,99,235,.22);
+    animation:rotateRing 12s linear infinite;
+}
+
+.circle::after{
+    content:"";
+    position:absolute;
+    inset:-16px;
+    border-radius:50%;
+    border:1px solid rgba(37,99,235,.08);
+    animation:pulseRing 2.8s ease-in-out infinite;
+}
+
+.journey-item:hover .circle{
+    transform:translateY(-10px) scale(1.06);
+    box-shadow:
+        0 25px 55px rgba(37,99,235,.20),
+        0 0 0 10px rgba(37,99,235,.045),
+        0 0 45px rgba(37,99,235,.12);
+}
+
+.journey-item:nth-child(1) .circle{
+    animation:floatCircle 4s 2s ease-in-out infinite;
+}
+
+.journey-item:nth-child(2) .circle{
+    animation:floatCircle 4s ease-in-out infinite;
+}
+
+.journey-item:nth-child(3) .circle{
+    animation:floatCircle 4s 1s ease-in-out infinite;
+}
+
+.journey-item h3{
+    font-size:17px;
+    font-weight:800;
+    color:var(--dark);
+    margin-bottom:10px;
+}
+
+.journey-item p{
+    max-width:245px;
+    margin:auto;
+    font-size:13px;
+    line-height:1.75;
+    color:var(--muted);
+}
+
+@keyframes floatCircle{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-7px);
+    }
+}
+
+@keyframes pulseRing{
+    0%,100%{
+        transform:scale(.94);
+        opacity:.25;
+    }
+
+    50%{
+        transform:scale(1.08);
+        opacity:.65;
+    }
+}
+
+@keyframes rotateRing{
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.statement{
+    margin-top:110px;
+    padding:55px 35px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.90),
+            rgba(239,246,255,.85)
+        );
+
+    border:1px solid rgba(37,99,235,.10);
+    border-radius:30px;
+
+    box-shadow:
+        0 25px 70px rgba(30,64,175,.08);
+
+    position:relative;
+    overflow:hidden;
+}
+
+.statement-heading{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    margin-bottom:35px;
+}
+
+.statement-heading small{
+    display:block;
+    color:var(--blue);
+    font-size:10px;
+    font-weight:800;
+    letter-spacing:2.5px;
+    margin-bottom:10px;
+}
+
+.statement-heading h2{
+    font-size:clamp(24px,4vw,36px);
+    color:var(--dark);
+    letter-spacing:-1.2px;
+}
+
+.site-content{
+    position:relative;
+    z-index:2;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.content-card{
+    background:rgba(255,255,255,.80);
+    border:1px solid rgba(37,99,235,.10);
+    border-radius:20px;
+    padding:28px 24px;
+    transition:.3s ease;
+}
+
+.content-card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(37,99,235,.22);
+    box-shadow:
+        0 18px 40px rgba(37,99,235,.09);
+}
+
+/* PLAIN HEADINGS */
+
+.content-icon{
+    width:auto;
+    height:auto;
+    border-radius:0;
+    display:block;
+    margin-bottom:18px;
+    color:var(--blue);
+    font-size:16px;
+    font-weight:800;
+    background:none;
+    border:none;
+}
+
+.content-card h3{
+    font-size:17px;
+    font-weight:800;
+    color:var(--dark);
+    margin-bottom:8px;
+}
+
+.content-card p{
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.7;
+}
+
+footer{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:20px 20px 35px;
+    color:#94a3b8;
+    font-size:11px;
+}
+
+.hero > *{
+    animation:fadeUp .8s ease both;
+}
+
+.eyebrow{
+    animation-delay:.05s;
+}
+
+h1{
+    animation-delay:.15s;
+}
+
+.subtitle{
+    animation-delay:.25s;
+}
+
+.hero-buttons{
+    animation-delay:.35s;
+}
+
+.journey{
+    animation:fadeUp .9s .45s ease both;
+}
+
+.statement{
+    animation:fadeUp .9s .55s ease both;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+/* Subtle continuous animation — What's Inside only */
+.statement{
+    animation: insideFloat 6s ease-in-out infinite;
+}
+
+.content-card{
+    animation: insideCardFloat 5s ease-in-out infinite;
+}
+
+.content-card:nth-child(2){
+    animation-delay: 0.8s;
+}
+
+.content-card:nth-child(3){
+    animation-delay: 1.6s;
+}
+
+@keyframes insideFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-4px);
+    }
+}
+
+@keyframes insideCardFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-3px);
+    }
+}
+
+@media(max-width:700px){
+
+    header{
+        padding:20px 5%;
+    }
+
+    main{
+        padding:35px 5% 70px;
+    }
+
+    .hero{
+        min-height:500px;
+    }
+
+    h1{
+        font-size:42px;
+        letter-spacing:-3px;
+    }
+
+    h1 .top-line{
+        white-space:nowrap;
+    }
+
+    h1 .bottom-line{
+        font-size:.68em;
+        letter-spacing:-1.5px;
+        white-space:nowrap;
+    }
+
+    h1::after{
+        font-size:68px;
+        letter-spacing:-5px;
+    }
+
+    .subtitle{
+        font-size:14px;
+        line-height:1.7;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .journey-btn,
+    .sample-btn{
+        width:100%;
+        max-width:280px;
+    }
+
+    .journey{
+        margin-top:20px;
+    }
+
+    .journey-line{
+        display:none;
+    }
+
+    .journey-items{
+        grid-template-columns:1fr;
+        gap:55px;
+    }
+
+    .circle{
+        width:115px;
+        height:115px;
+    }
+
+    .statement{
+        margin-top:75px;
+        padding:45px 18px;
+        border-radius:24px;
+    }
+
+    .site-content{
+        grid-template-columns:1fr;
+    }
+    
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="nav">
+
+        <div class="logo">
+
+            DOOMS DAY QCAB & PYQs
+
+            <span>ANTHROPOLOGY</span>
+
+        </div>
+
+    </div>
+
+</header>
+
+
+
+<main>
+
+<section class="hero">
+
+    <div class="eyebrow">
+        ANTHROPOLOGY
+    </div>
+
+    <h1>
+        <span class="top-line">PYQs + QCAB</span>
+        <span class="bottom-line">Perfect Combo for Anthropology</span>
+    </h1>
+
+    <p class="subtitle">
+        Previous Year Questions.
+        Intelligent Practice.
+        Consistent Answer Writing.
+    </p>
+
+    <div class="hero-buttons">
+
+        <button class="journey-btn" onclick="beginJourney()">
+            BEGIN / RESUME JOURNEY
+        </button>
+
+        <button class="sample-btn" onclick="sampleQCAB()">
+            TRY SAMPLE QCAB
+        </button>
+
+    </div>
+
+</section>
+
+
+<section class="journey">
+
+    <div class="journey-line"></div>
+
+    <div class="journey-items">
+
+        <div class="journey-item">
+
+            <div class="circle">
+                PYQs
+            </div>
+
+            <h3>
+                Understand
+            </h3>
+
+            <p>
+                Know what UPSC actually asks.
+            </p>
+
+        </div>
+
+
+        <div class="journey-item">
+
+            <div class="circle">
+                QCAB
+            </div>
+
+            <h3>
+                Practice
+            </h3>
+
+            <p>
+                Turn PYQs into unlimited practice.
+            </p>
+
+        </div>
+
+
+        <div class="journey-item">
+
+            <div class="circle">
+                PRACTICE
+            </div>
+
+            <h3>
+                Improve
+            </h3>
+
+            <p>
+                Build consistency for Mains.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="statement">
+
+    <div class="statement-heading">
+
+        <small>
+            WHAT'S INSIDE
+        </small>
+
+        <h2>
+            Built Around Your Preparation
+        </h2>
+
+    </div>
+
+
+    <div class="site-content">
+
+        <div class="content-card">
+
+            <div class="content-icon">
+                Paper Wise
+            </div>
+
+            <p>
+                Paper 1 &nbsp;·&nbsp; Paper 2
+                <br>
+                Separated for ease of preparation.
+            </p>
+
+        </div>
+
+
+        <div class="content-card">
+
+            <div class="content-icon">
+                Year Wise
+            </div>
+
+            <p>
+                Past 10 Years
+                <br>
+                Properly arranged PYQs.
+            </p>
+
+        </div>
+
+
+        <div class="content-card">
+
+            <div class="content-icon">
+                Topic wise
+            </div>
+
+            <p>
+                Strictly based on topics from
+                <br>
+                UPSC Anthropology Syllabus.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+<div style="text-align:center; padding:35px 0 45px;">
+    <a href="https://sankalpkgaidhani-art.github.io/main-page/"
+       style="
+           display:inline-block;
+           padding:13px 24px;
+           border-radius:999px;
+           background:#102a56;
+           color:#fff;
+           text-decoration:none;
+           font-size:13px;
+           font-weight:800;
+           letter-spacing:.06em;
+           box-shadow:0 10px 25px rgba(16,42,86,.15);
+       ">
+        BACK TO MAIN PAGE
+    </a>
+</div>
+
+
+<footer>
+    © 2026 Dooms Day QCAB Generator
+</footer>
+
+
+<script>
+
+function beginJourney(){ window.location.href = "https://sankalpkgaidhani-art.github.io/anthropology_qcab/"; }
+
+function sampleQCAB(){ window.location.href = "sample-qcab.html"; 
+
+}
+
+</script>
+
+
+
+</body>
+</html>
+```

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sample QCAB | Dooms Day QCAB</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+:root{
+    --blue:#2563eb;
+    --blue2:#3b82f6;
+    --dark:#102a56;
+    --text:#172033;
+    --muted:#64748b;
+    --white:#ffffff;
+    --line:rgba(37,99,235,.14);
+}
+
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    min-height:100vh;
+    font-family:Arial,Helvetica,sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 15% 10%,rgba(59,130,246,.15),transparent 28%),
+        radial-gradient(circle at 85% 80%,rgba(37,99,235,.12),transparent 30%),
+        linear-gradient(135deg,#f8fbff,#eef5ff);
+}
+
+header{
+    width:min(1180px,92%);
+    margin:0 auto;
+    padding:28px 0 10px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-weight:900;
+    letter-spacing:.08em;
+    color:var(--dark);
+    line-height:1.15;
+}
+
+.logo span{
+    display:block;
+    color:var(--blue);
+    font-size:12px;
+    letter-spacing:.18em;
+    margin-top:5px;
+}
+
+.back{
+    text-decoration:none;
+    color:var(--dark);
+    font-size:13px;
+    font-weight:800;
+    padding:10px 15px;
+    border:1px solid var(--line);
+    border-radius:999px;
+    background:rgba(255,255,255,.62);
+}
+
+main{
+    width:min(900px,92%);
+    margin:55px auto 80px;
+}
+
+.hero{
+    text-align:center;
+    margin-bottom:38px;
+}
+
+.eyebrow{
+    color:var(--blue);
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.2em;
+    margin-bottom:14px;
+}
+
+h1{
+    margin:0;
+    color:var(--dark);
+    font-size:clamp(34px,6vw,58px);
+    line-height:1.02;
+    letter-spacing:-.045em;
+}
+
+.subtitle{
+    margin:17px auto 0;
+    max-width:650px;
+    color:var(--muted);
+    font-size:16px;
+    line-height:1.65;
+}
+
+.questions{
+    display:grid;
+    gap:16px;
+}
+
+.question{
+    position:relative;
+    display:block;
+    cursor:pointer;
+}
+
+.question input{
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
+
+.card{
+    padding:25px 27px 24px 62px;
+    border:1px solid rgba(37,99,235,.14);
+    border-radius:22px;
+    background:rgba(255,255,255,.72);
+    box-shadow:0 12px 35px rgba(16,42,86,.07);
+    transition:.22s ease;
+    min-height:135px;
+}
+
+.question:hover .card{
+    transform:translateY(-2px);
+    box-shadow:0 16px 40px rgba(16,42,86,.11);
+}
+
+.question input:checked + .card{
+    border-color:var(--blue);
+    background:rgba(239,246,255,.95);
+    box-shadow:0 15px 42px rgba(37,99,235,.14);
+}
+
+.check{
+    position:absolute;
+    left:24px;
+    top:27px;
+    width:23px;
+    height:23px;
+    border:2px solid #94a3b8;
+    border-radius:7px;
+    background:#fff;
+    transition:.2s ease;
+}
+
+.question input:checked + .card .check{
+    background:var(--blue);
+    border-color:var(--blue);
+}
+
+.question input:checked + .card .check:after{
+    content:"✓";
+    color:#fff;
+    position:absolute;
+    left:4px;
+    top:-1px;
+    font-size:16px;
+    font-weight:900;
+}
+
+.meta{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:12px;
+}
+
+.number{
+    color:var(--blue);
+    font-weight:900;
+    font-size:13px;
+    letter-spacing:.08em;
+}
+
+.marks{
+    font-size:11px;
+    font-weight:800;
+    color:var(--muted);
+    padding:5px 9px;
+    border-radius:999px;
+    background:#f1f5f9;
+}
+
+.question-text{
+    font-family:"Times New Roman",serif;
+    font-size:18px;
+    line-height:1.55;
+    color:#111827;
+}
+
+.bottom{
+    margin-top:28px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    gap:13px;
+}
+
+.selection-count{
+    color:var(--muted);
+    font-size:13px;
+    font-weight:700;
+}
+
+.generate{
+    border:0;
+    cursor:pointer;
+    padding:16px 30px;
+    border-radius:999px;
+    background:var(--dark);
+    color:#fff;
+    font-size:13px;
+    font-weight:900;
+    letter-spacing:.09em;
+    box-shadow:0 12px 28px rgba(16,42,86,.18);
+    transition:.2s ease;
+}
+
+.generate:hover{
+    transform:translateY(-2px);
+    background:#173d78;
+}
+
+.generate:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+    transform:none;
+}
+
+.note{
+    text-align:center;
+    color:#94a3b8;
+    font-size:11px;
+    margin-top:7px;
+}
+
+footer{
+    text-align:center;
+    color:#94a3b8;
+    font-size:11px;
+    padding:0 0 30px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        DOOMS DAY QCAB
+        <span>ANTHROPOLOGY</span>
+    </div>
+    <a class="back" href="index.html">BACK</a>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="eyebrow">SAMPLE QCAB</div>
+        <h1>Pick Your Questions.</h1>
+        <p class="subtitle">
+            Select any of the questions below and generate your Anthropology QCAB.
+            Try one, two, or all three.
+        </p>
+    </section>
+
+    <section class="questions">
+
+        <label class="question">
+            <input type="checkbox" value="1" data-marks="10"
+                data-question="Discuss the concept of cultural relativism in anthropology. Illustrate with suitable examples.">
+            <div class="card">
+                <span class="check"></span>
+                <div class="meta">
+                    <span class="number">QUESTION 01</span>
+                    <span class="marks">10 MARKS · 150 WORDS</span>
+                </div>
+                <div class="question-text">
+                    Discuss the concept of cultural relativism in anthropology. Illustrate with suitable examples.
+                </div>
+            </div>
+        </label>
+
+        <label class="question">
+            <input type="checkbox" value="2" data-marks="15"
+                data-question="Explain the relationship between caste and tribe in India. Discuss the major processes of tribal transformation in contemporary India.">
+            <div class="card">
+                <span class="check"></span>
+                <div class="meta">
+                    <span class="number">QUESTION 02</span>
+                    <span class="marks">15 MARKS · 250 WORDS</span>
+                </div>
+                <div class="question-text">
+                    Explain the relationship between caste and tribe in India. Discuss the major processes of tribal transformation in contemporary India.
+                </div>
+            </div>
+        </label>
+
+        <label class="question">
+            <input type="checkbox" value="3" data-marks="20"
+                data-question="Critically examine the contribution of functionalism to the study of social and cultural institutions. Discuss the views of Malinowski and Radcliffe-Brown.">
+            <div class="card">
+                <span class="check"></span>
+                <div class="meta">
+                    <span class="number">QUESTION 03</span>
+                    <span class="marks">20 MARKS · 300 WORDS</span>
+                </div>
+                <div class="question-text">
+                    Critically examine the contribution of functionalism to the study of social and cultural institutions. Discuss the views of Malinowski and Radcliffe-Brown.
+                </div>
+            </div>
+        </label>
+
+    </section>
+
+    <div class="bottom">
+        <div class="selection-count" id="selectionCount">0 questions selected</div>
+        <button class="generate" id="generateQCAB" disabled>
+            GENERATE QCAB
+        </button>
+        <div class="note">Your sample QCAB is generated instantly as a PDF.</div>
+    </div>
+</main>
+
+<footer>
+    © 2026 Dooms Day QCAB Generator
+</footer>
+
+<script>
+const checkboxes = [...document.querySelectorAll('.question input')];
+const count = document.getElementById('selectionCount');
+const button = document.getElementById('generateQCAB');
+
+function updateSelection(){
+    const selected = checkboxes.filter(x => x.checked).length;
+    count.textContent = `${selected} question${selected === 1 ? '' : 's'} selected`;
+    button.disabled = selected === 0;
+}
+
+checkboxes.forEach(cb => cb.addEventListener('change', updateSelection));
+
+function getAnswerPages(q){
+    const marks = Number(q.marks) || 0;
+    if(marks === 15) return 3;
+    if(marks >= 20) return 4;
+    return 2;
+}
+
+function escapePDFHTML(value){
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+function addFooter(doc){
+    doc.setFontSize(9);
+    doc.text(
+        "Made by Dooms Day QCAB Generator - for more info contact cds2gmail.com",
+        105,
+        288,
+        { align:"center" }
+    );
+}
+
+async function generateQCABPDF(questions){
+
+    const { jsPDF } = window.jspdf;
+
+    const doc = new jsPDF({
+        unit:"mm",
+        format:"a4"
+    });
+
+    const pageHeight = 297;
+    const leftMargin = 25;
+    const rightMargin = 185;
+    const topMargin = 15;
+    const bottomMargin = 282;
+
+    doc.setFont("Times","Roman");
+    doc.setFontSize(12);
+
+    // ==========================================
+    // PART 1: QUESTION LISTING
+    // Exact structure of the supplied generator
+    // ==========================================
+
+    let currentY = topMargin;
+    const localWidth = rightMargin - leftMargin + 4;
+    const lineHeight = 6;
+
+    for(const q of questions){
+
+        const qText =
+            `${q.question_text || ""}   [${q.marks} M${q.word_limit ? ` / ${q.word_limit} W` : ""}]`;
+
+        const splitText = doc.splitTextToSize(qText, localWidth);
+
+        const totalHeight =
+            splitText.length * lineHeight + lineHeight;
+
+        if(currentY + totalHeight > pageHeight - 15){
+            addFooter(doc);
+            doc.addPage();
+            currentY = topMargin;
+        }
+
+        doc.text(
+            `${q.question_number}.`,
+            leftMargin - 10,
+            currentY
+        );
+
+        doc.text(
+            splitText,
+            leftMargin + 2,
+            currentY
+        );
+
+        currentY += totalHeight;
+    }
+
+    // QUESTION LISTING FOOTER
+    addFooter(doc);
+
+    // ==========================================
+    // PART 2: QCAB ANSWER PAGES
+    // ==========================================
+
+    for(const q of questions){
+
+        const pagesNeeded = getAnswerPages(q);
+
+        for(let p = 0; p < pagesNeeded; p++){
+
+            doc.addPage();
+
+            doc.setLineWidth(0.3);
+
+            // Exact vertical answer-sheet lines
+            doc.line(
+                leftMargin,
+                topMargin,
+                leftMargin,
+                bottomMargin
+            );
+
+            doc.line(
+                rightMargin,
+                topMargin,
+                rightMargin,
+                bottomMargin
+            );
+
+            // Exact left-margin identifier format
+            const footerText =
+                `XXXX-CUSTOM_${q.question_number}`;
+
+            doc.setFontSize(8);
+
+            doc.text(
+                footerText,
+                leftMargin - 10,
+                bottomMargin + 3
+            );
+
+            // ==========================================
+            // FIRST ANSWER PAGE
+            // ==========================================
+
+            if(p === 0){
+
+                doc.setFontSize(12);
+
+                doc.text(
+                    `Q. ${q.question_number}`,
+                    leftMargin - 15,
+                    topMargin + 5
+                );
+
+                const localQuestionWidth =
+                    rightMargin - leftMargin - 4;
+
+                const splitText =
+                    doc.splitTextToSize(
+                        q.question_text || "",
+                        localQuestionWidth
+                    );
+
+                doc.setFontSize(12);
+
+                doc.text(
+                    splitText,
+                    leftMargin + 2,
+                    topMargin + 5
+                );
+
+                const questionBottom =
+                    topMargin + 5 + splitText.length * 6;
+
+                // Marks / year metadata area
+                doc.setFontSize(12);
+
+                const metadata = [
+                    q.marks != null ? `${q.marks} M` : "",
+                    q.year ? `${q.year}` : ""
+                ].filter(Boolean).join(" / ");
+
+                doc.text(
+                    metadata,
+                    rightMargin + 2,
+                    topMargin + 5
+                );
+
+                // Preserve the original answer-writing area logic
+                if(questionBottom < bottomMargin - 4){
+                    doc.setFontSize(8);
+                    doc.setTextColor(110,110,110);
+                    doc.setTextColor(0,0,0);
+                }
+
+            }else{
+
+                const localWidth = 23;
+
+                const splitText =
+                    doc.splitTextToSize(
+                        "Candidates must not write on this margin",
+                        localWidth
+                    );
+
+                doc.setFontSize(8);
+
+                doc.text(
+                    splitText,
+                    rightMargin + 2,
+                    topMargin + 5
+                );
+            }
+        }
+    }
+
+    window.generatedPDF = doc;
+    doc.save("QCAB.pdf");
+}
+
+button.addEventListener('click', () => {
+
+    const selected = checkboxes.filter(cb => cb.checked);
+
+    if(selected.length === 0){
+        alert("Select at least one question first.");
+        return;
+    }
+
+    const questions = selected.map((cb, index) => ({
+        question_number: index + 1,
+        question_text: cb.dataset.question,
+        marks: Number(cb.dataset.marks),
+        word_limit:
+            Number(cb.dataset.marks) === 10 ? 150 :
+            Number(cb.dataset.marks) === 15 ? 250 : 300
+    }));
+
+    generateQCABPDF(questions);
+});
+
+updateSelection();
+</script>
+
+</body>
+</html>
