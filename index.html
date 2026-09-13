@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -480,6 +480,8 @@ h1::after{
         0 18px 40px rgba(37,99,235,.09);
 }
 
+/* PLAIN HEADINGS */
+
 .content-icon{
     width:auto;
     height:auto;
@@ -554,344 +556,93 @@ h1{
         transform:translateY(0);
     }
 }
-
-
-
-.benefit-toggle-anchor{
-    position:relative;
-    height:86px;
-    z-index:101;
+/* Subtle continuous animation — What's Inside only */
+.statement{
+    animation: insideFloat 6s ease-in-out infinite;
 }
 
-.benefit-toggle-anchor .benefit-toggle-wrap{
-    position:absolute;
-    top:50%;
-    left:50%;
-    right:auto;
-    transform:translate(-50%,-50%);
+.content-card{
+    animation: insideCardFloat 5s ease-in-out infinite;
 }
 
-/* =========================================
-   DOOMSDAY ON / OFF BENEFIT OVERLAY
-========================================= */
-
-.benefit-toggle-wrap{
-    z-index:100;
+.content-card:nth-child(2){
+    animation-delay: 0.8s;
 }
 
-.benefit-toggle{
-    position:relative;
-    width:118px;
-    height:38px;
-    padding:0 12px;
-    border:1px solid rgba(23,32,51,.16);
-    border-radius:999px;
-    background:rgba(255,255,255,.92);
-    color:#172033;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    cursor:pointer;
-    box-shadow:0 8px 24px rgba(15,23,42,.10);
-    transition:.25s ease;
-    font-family:Inter,system-ui,sans-serif;
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:1px;
+.content-card:nth-child(3){
+    animation-delay: 1.6s;
 }
 
-.benefit-toggle .toggle-label{
-    line-height:1;
-}
-
-.benefit-toggle .toggle-knob{
-    width:22px;
-    height:22px;
-    border-radius:50%;
-    background:#172033;
-    transition:.3s ease;
-    box-shadow:0 2px 7px rgba(15,23,42,.18);
-}
-
-.benefit-toggle.active{
-    background:#172033;
-    color:#fff;
-}
-
-.benefit-toggle.active .toggle-knob{
-    background:#fff;
-    transform:translateX(0);
-}
-
-.page-benefits{
-    position:fixed;
-    inset:0;
-    z-index:50;
-    pointer-events:none;
-    overflow:hidden;
-    color:#172033;
-}
-
-.benefit-arrow{
-    position:absolute;
-    width:180px;
-    height:135px;
-    opacity:0;
-    transform:scale(.65);
-    transform-origin:center;
-    transition:opacity .3s ease,transform .4s cubic-bezier(.2,.8,.2,1);
-}
-
-.page-benefits.active .benefit-arrow{
-    opacity:.96;
-    transform:scale(1);
-}
-
-.benefit-arrow svg{
-    width:100%;
-    height:100%;
-    overflow:visible;
-}
-
-.benefit-arrow path{
-    fill:none;
-    stroke:#172033;
-    stroke-width:4.5;
-    stroke-linecap:round;
-    stroke-linejoin:round;
-}
-
-.benefit-note{
-    position:absolute;
-    max-width:190px;
-    opacity:0;
-    transition:opacity .3s ease;
-    font-family:"Comic Sans MS","Segoe Print","Bradley Hand",cursive;
-    color:#172033;
-    text-align:left;
-}
-
-.page-benefits.active .benefit-note{
-    opacity:1;
-}
-
-.benefit-note span{
-    display:block;
-    font-size:14px;
-    font-weight:800;
-    letter-spacing:1px;
-    line-height:1.2;
-}
-
-.benefit-note small{
-    display:block;
-    margin-top:5px;
-    font-size:11px;
-    line-height:1.45;
-    font-weight:600;
-}
-
-/* Text sits exactly at the arrowhead destination. */
-.note-1{top:13%;left:20%;}
-.note-2{top:15%;right:20%;}
-.note-3{top:50%;left:17%;}
-.note-4{top:48%;right:17%;}
-.note-5{bottom:11%;left:28%;}
-.note-6{bottom:10%;right:28%;}
-
-/* Every arrow originates from the fixed DOOMSDAY toggle. */
-.arrow-1{
-    top:40px;
-    left:calc(94% - 145px);
-    transform-origin:top right;
-    transform:rotate(145deg) scale(.65);
-}
-.arrow-2{
-    top:40px;
-    right:calc(94% - 145px);
-    transform-origin:top left;
-    transform:rotate(35deg) scale(.65);
-}
-.arrow-3{
-    top:60px;
-    left:calc(94% - 170px);
-    transform-origin:top right;
-    transform:rotate(160deg) scale(.65);
-}
-.arrow-4{
-    top:60px;
-    right:calc(94% - 170px);
-    transform-origin:top left;
-    transform:rotate(20deg) scale(.65);
-}
-.arrow-5{
-    top:55px;
-    left:calc(94% - 135px);
-    transform-origin:top right;
-    transform:rotate(125deg) scale(.65);
-}
-.arrow-6{
-    top:55px;
-    right:calc(94% - 135px);
-    transform-origin:top left;
-    transform:rotate(55deg) scale(.65);
-}
-
-.page-benefits.active .arrow-1{transform:rotate(145deg) scale(1);}
-.page-benefits.active .arrow-2{transform:rotate(35deg) scale(1);}
-.page-benefits.active .arrow-3{transform:rotate(160deg) scale(1);}
-.page-benefits.active .arrow-4{transform:rotate(20deg) scale(1);}
-.page-benefits.active .arrow-5{transform:rotate(125deg) scale(1);}
-.page-benefits.active .arrow-6{transform:rotate(55deg) scale(1);}
-
-@media(max-width:700px){
-    .benefit-toggle-anchor{
-        height:76px;
+@keyframes insideFloat{
+    0%,100%{
+        transform:translateY(0);
     }
-
-    .benefit-toggle-anchor .benefit-toggle-wrap{
-        top:50%;
-        left:50%;
-        right:auto;
+    50%{
+        transform:translateY(-4px);
     }
+}
 
-    .benefit-toggle{
-        width:108px;
-        height:34px;
-        font-size:9px;
+@keyframes insideCardFloat{
+    0%,100%{
+        transform:translateY(0);
     }
-
-    .benefit-toggle .toggle-knob{
-        width:20px;
-        height:20px;
+    50%{
+        transform:translateY(-3px);
     }
-
-    .benefit-note{
-        max-width:125px;
-    }
-
-    .benefit-note span{
-        font-size:10px;
-    }
-
-    .benefit-note small{
-        font-size:9px;
-    }
-
-    .note-1{top:17%;left:3%;}
-    .note-2{top:17%;right:3%;}
-    .note-3{top:50%;left:2%;}
-    .note-4{top:49%;right:2%;}
-    .note-5{bottom:9%;left:8%;}
-    .note-6{bottom:9%;right:8%;}
-
-    .arrow-1{top:35px;left:calc(95% - 125px);width:125px;height:95px;}
-    .arrow-2{top:35px;right:calc(95% - 125px);width:125px;height:95px;}
-    .arrow-3{top:50px;left:calc(95% - 140px);width:125px;height:95px;}
-    .arrow-4{top:50px;right:calc(95% - 140px);width:125px;height:95px;}
-    .arrow-5{top:45px;left:calc(95% - 120px);width:125px;height:95px;}
-    .arrow-6{top:45px;right:calc(95% - 120px);width:125px;height:95px;}
-
-    .page-benefits.active .arrow-1{transform:rotate(145deg) scale(1);}
-    .page-benefits.active .arrow-2{transform:rotate(35deg) scale(1);}
-    .page-benefits.active .arrow-3{transform:rotate(160deg) scale(1);}
-    .page-benefits.active .arrow-4{transform:rotate(20deg) scale(1);}
-    .page-benefits.active .arrow-5{transform:rotate(125deg) scale(1);}
-    .page-benefits.active .arrow-6{transform:rotate(55deg) scale(1);}
 }
 
 @media(max-width:700px){
 
     header{
-        padding:18px 18px;
-    }
-
-    .nav{
-        width:100%;
-    }
-
-    .logo{
-        font-size:16px;
-        line-height:1.25;
-    }
-
-    .logo span{
-        font-size:9px;
-        letter-spacing:1.6px;
+        padding:20px 5%;
     }
 
     main{
-        width:100%;
-        max-width:100%;
-        padding:25px 18px 60px;
+        padding:35px 5% 70px;
     }
 
     .hero{
-        min-height:auto;
-        padding:45px 0 25px;
-        width:100%;
-    }
-
-    .eyebrow{
-        max-width:100%;
-        padding:8px 13px;
-        font-size:11px;
-        letter-spacing:1.3px;
-        margin-bottom:22px;
+        min-height:500px;
     }
 
     h1{
-        width:100%;
-        font-size:34px;
-        line-height:1.08;
-        letter-spacing:-1.8px;
-        margin-bottom:22px;
+        font-size:42px;
+        letter-spacing:-3px;
     }
 
-    h1 .top-line,
-    h1 .bottom-line{
-        white-space:normal;
-        overflow-wrap:anywhere;
+    h1 .top-line{
+        white-space:nowrap;
     }
 
     h1 .bottom-line{
         font-size:.68em;
-        letter-spacing:-1px;
-        margin-top:7px;
+        letter-spacing:-1.5px;
+        white-space:normal;
     }
 
     h1::after{
-        font-size:42px;
-        letter-spacing:-3px;
-        max-width:100%;
-        overflow:hidden;
+        font-size:68px;
+        letter-spacing:-5px;
     }
 
     .subtitle{
-        width:100%;
-        max-width:100%;
         font-size:14px;
-        line-height:1.65;
-        margin-bottom:28px;
+        line-height:1.7;
     }
 
     .hero-buttons{
         flex-direction:column;
         width:100%;
-        gap:11px;
     }
 
     .journey-btn,
     .sample-btn{
         width:100%;
-        max-width:320px;
-        padding:14px 18px;
-        font-size:11px;
+        max-width:280px;
     }
 
     .journey{
         margin-top:20px;
-        padding:45px 0 20px;
     }
 
     .journey-line{
@@ -900,50 +651,24 @@ h1{
 
     .journey-items{
         grid-template-columns:1fr;
-        gap:48px;
+        gap:55px;
     }
 
     .circle{
-        width:105px;
-        height:105px;
-        margin-bottom:22px;
-        font-size:15px;
-    }
-
-    .journey-item p{
-        max-width:290px;
-        font-size:12px;
+        width:115px;
+        height:115px;
     }
 
     .statement{
-        width:100%;
-        margin-top:65px;
-        padding:38px 16px;
-        border-radius:22px;
-    }
-
-    .statement-heading{
-        margin-bottom:25px;
-    }
-
-    .statement-heading h2{
-        font-size:25px;
-        line-height:1.15;
+        margin-top:75px;
+        padding:45px 18px;
+        border-radius:24px;
     }
 
     .site-content{
         grid-template-columns:1fr;
-        gap:14px;
     }
-
-    .content-card{
-        padding:23px 20px;
-    }
-
-    footer{
-        padding:18px 15px 28px;
-        font-size:10px;
-    }
+    
 
 }
 
@@ -967,82 +692,6 @@ h1{
     </div>
 
 </header>
-
-<div class="page-benefits" id="pageBenefits">
-
-    <div class="benefit-note note-1">
-        <span>PYQ CENTRIC</span>
-        <small>Start where UPSC actually asks.</small>
-    </div>
-
-    <div class="benefit-note note-2">
-        <span>PAPER WISE</span>
-        <small>Clear Paper 1 &amp; Paper 2 preparation.</small>
-    </div>
-
-    <div class="benefit-note note-3">
-        <span>YEAR WISE</span>
-        <small>See what keeps repeating.</small>
-    </div>
-
-    <div class="benefit-note note-4">
-        <span>TOPIC WISE</span>
-        <small>Practice exactly from the syllabus.</small>
-    </div>
-
-    <div class="benefit-note note-5">
-        <span>QCAB</span>
-        <small>Turn PYQs into unlimited practice.</small>
-    </div>
-
-    <div class="benefit-note note-6">
-        <span>EXAM FOCUSED</span>
-        <small>No unnecessary questions.</small>
-    </div>
-
-    <div class="benefit-arrow arrow-1">
-        <svg viewBox="0 0 150 120" aria-hidden="true">
-            <path d="M145 8 C120 15, 88 34, 58 60 C38 77, 25 91, 12 108"/>
-            <path d="M12 108 L27 104 L19 93"/>
-        </svg>
-    </div>
-
-    <div class="benefit-arrow arrow-2">
-        <svg viewBox="0 0 150 120" aria-hidden="true">
-            <path d="M5 8 C30 15, 62 34, 92 60 C112 77, 125 91, 138 108"/>
-            <path d="M138 108 L123 104 L131 93"/>
-        </svg>
-    </div>
-
-    <div class="benefit-arrow arrow-3">
-        <svg viewBox="0 0 150 120" aria-hidden="true">
-            <path d="M145 5 C120 20, 90 36, 62 59 C42 75, 26 91, 12 113"/>
-            <path d="M12 113 L27 109 L19 98"/>
-        </svg>
-    </div>
-
-    <div class="benefit-arrow arrow-4">
-        <svg viewBox="0 0 150 120" aria-hidden="true">
-            <path d="M5 5 C30 20, 60 36, 88 59 C108 75, 124 91, 138 113"/>
-            <path d="M138 113 L123 109 L131 98"/>
-        </svg>
-    </div>
-
-    <div class="benefit-arrow arrow-5">
-        <svg viewBox="0 0 150 120" aria-hidden="true">
-            <path d="M145 5 C120 20, 93 38, 68 62 C47 82, 27 96, 10 113"/>
-            <path d="M10 113 L25 109 L17 98"/>
-        </svg>
-    </div>
-
-    <div class="benefit-arrow arrow-6">
-        <svg viewBox="0 0 150 120" aria-hidden="true">
-            <path d="M5 5 C30 20, 57 38, 82 62 C103 82, 123 96, 140 113"/>
-            <path d="M140 113 L125 109 L133 98"/>
-        </svg>
-    </div>
-
-</div>
 
 
 
@@ -1140,20 +789,8 @@ h1{
 
 </section>
 
-<div class="benefit-toggle-anchor">
-    <div class="benefit-toggle-wrap">
-        <button class="benefit-toggle" onclick="togglePageBenefits()" aria-label="Toggle Doomsday benefits">
-            <span class="toggle-label">DOOMSDAY</span>
-            <span class="toggle-knob"></span>
-        </button>
-    </div>
-</div>
-
-
-<!-- WHAT'S INSIDE -->
 
 <section class="statement">
-
 
     <div class="statement-heading">
 
@@ -1168,11 +805,7 @@ h1{
     </div>
 
 
-
     <div class="site-content">
-
-
-        <!-- PAPER WISE -->
 
         <div class="content-card">
 
@@ -1180,25 +813,20 @@ h1{
                 Paper Wise
             </div>
 
-   
             <p>
                 Paper 1 &nbsp;·&nbsp; Paper 2
                 <br>
-                 Separated for ease of preparation.
+                Separated for ease of preparation.
             </p>
 
         </div>
 
-
-
-        <!-- YEAR WISE -->
 
         <div class="content-card">
 
             <div class="content-icon">
                 Year Wise
             </div>
-
 
             <p>
                 Past 10 Years
@@ -1209,15 +837,11 @@ h1{
         </div>
 
 
-
-        <!-- TOPIC WISE -->
-
         <div class="content-card">
 
             <div class="content-icon">
                 Topic wise
             </div>
-
 
             <p>
                 Strictly based on topics from
@@ -1227,13 +851,28 @@ h1{
 
         </div>
 
-
     </div>
-
 
 </section>
 
 </main>
+<div style="text-align:center; padding:35px 0 45px;">
+    <a href="https://sankalpkgaidhani-art.github.io/main-page/"
+       style="
+           display:inline-block;
+           padding:13px 24px;
+           border-radius:999px;
+           background:#102a56;
+           color:#fff;
+           text-decoration:none;
+           font-size:13px;
+           font-weight:800;
+           letter-spacing:.06em;
+           box-shadow:0 10px 25px rgba(16,42,86,.15);
+       ">
+        BACK TO MAIN PAGE
+    </a>
+</div>
 
 
 <footer>
@@ -1243,24 +882,16 @@ h1{
 
 <script>
 
+function beginJourney(){ window.location.href = "https://sankalpkgaidhani-art.github.io/anthropology_qcab/"; }
 
-function togglePageBenefits(){
-    const benefits = document.getElementById("pageBenefits");
-    const toggle = document.querySelector(".benefit-toggle");
+function sampleQCAB(){ window.location.href = "sample-qcab.html"; 
 
-    benefits.classList.toggle("active");
-    toggle.classList.toggle("active");
-}
-
-function beginJourney(){
-    window.location.href = "#";
-}
-
-function sampleQCAB(){
-    window.location.href = "#";
 }
 
 </script>
 
+
+
 </body>
 </html>
+```
